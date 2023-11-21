@@ -1,6 +1,9 @@
 import './styles.css';
 import Todo from './createtodo';
+import { addNewProject, cancelProject, closeProjectDialog, submitProject } from './project';
 
-const last = new Todo('eat', 'rice', '23/11/23', 'high')
 
-console.log(last)
+addNewProject()
+closeProjectDialog()
+submitProject()
+cancelProject()

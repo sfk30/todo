@@ -71,7 +71,7 @@ button > svg {
     width: 50px;
 }
 
-.projects {
+.projects-text {
     margin-top: 70px;
     margin-left: 10px;
 }
@@ -99,4 +99,46 @@ button > svg {
 #add-project > svg {
     height: 30px;
     width: 30px;
+}
+
+dialog[open] { 
+    height: 250px;
+    width: 400px;
+    margin: auto;
+    border: 5px solid black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+dialog[open] form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
+dialog[open] [id="project-name"] {
+    height: 30px;
+    padding: 5px;
+    width: 290px;
+}
+
+dialog[open] #sub-btn {
+    background-color: green;
+    color: white;
+    height: 30px;
+    width: 290px;
+    border-radius: 3px;
+    padding: 5px;
+    border: 1px solid #166534;
+}
+
+
+dialog[open] #cancel-btn {
+    background-color: red;
+    color: white;
+    height: 30px;
+    width: 290px;
+    border-radius: 3px;
+    padding: 5px;
 }
