@@ -78,7 +78,7 @@ button > svg {
 
 .two {
     display: flex;
-    gap: 100px;
+    gap: 120px;
     align-items: center;
 }
 
@@ -99,6 +99,12 @@ button > svg {
 #add-project > svg {
     height: 30px;
     width: 30px;
+}
+
+hr {
+    background: white;
+    height: 5px;
+    margin-bottom: 15px;
 }
 
 dialog[open] { 
@@ -141,4 +147,17 @@ dialog[open] #cancel-btn {
     width: 290px;
     border-radius: 3px;
     padding: 5px;
+}
+
+[data-lists] {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+}
+
+[data-lists] > li {
+    list-style-type: none;
+    color: white;
+    font-size: 20px;
 }
