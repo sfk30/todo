@@ -161,3 +161,31 @@ dialog[open] #cancel-btn {
     color: white;
     font-size: 20px;
 }
+
+
+/* .list-name > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:30px;
+    width:30px;
+    border-radius: 50%;
+    font-size: 20px;
+} */
+.list-name {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.list-name > span {
+    position: absolute;
+    font-size: 24px;
+    cursor: pointer;
+    right: 0;
+}
+
+.active-list {
+    background-color: grey;
+    border-radius: 3px;
+}
