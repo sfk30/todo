@@ -4,6 +4,12 @@ const projectForm = document.getElementById('project-form')
 const cancelBtn = document.getElementById('cancel-btn')
 const projectsContainer = document.querySelector('[data-lists]')
 const newListInput = document.getElementById('project-name')
+const listDisplayContainer = document.querySelector('[data-list-display-container]')
+const listTitleElement = document.querySelector('[data-list-title]')
+const listCountElement = document.querySelector('[data-list-count]')
+const tasksContainer = document.querySelector('[data-tasks]')
+const deleteListButton = document.querySelector('[data-delete-list-button]')
+
 
 const LOCAL_STORAGE_LIST_KEY = 'tasks.lists'
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId'
@@ -14,6 +20,9 @@ export function selectedProject() {
   projectsContainer.addEventListener('click', e => {
       if (e.target.tagName.toLowerCase() === 'li') {
         selectedListId = e.target.dataset.listId
+        const selectedList = lists.find(list => list.id === selectedListId)
+        listDisplayContainer.style.display = ''
+        listTitleElement.innerText = selectedList.name
         saveAndRender()
       }
   })
@@ -69,25 +78,31 @@ export function createList(name) {
 
 export function renderProjects() {
      clearElement(projectsContainer)
-     lists.forEach(list => {
-         const listElement = document.createElement('li')
-         listElement.dataset.listId = list.id
-         listElement.classList.add('list-name')
-         listElement.innerText = list.name
-         var deleteButton = document.createElement('span');
-         deleteButton.setAttribute('class', 'del-btn')
-         deleteButton.appendChild(document.createTextNode('x'));
-         listElement.appendChild(deleteButton)
-         if (list.id === selectedListId) {
-          listElement.classList.add('active-list')
-         }
-         projectsContainer.appendChild(listElement)
-         deleteButton.addEventListener('click', e => {
-           lists = lists.filter(list => list.id !== deleteButton.parentNode.dataset.listId)
-          //  deleteButton.parentNode.dataset.listId = null
-           saveAndRender()
-     })
- })}
+     renderLists()
+    }
+
+export function renderLists() {
+  lists.forEach(list => {
+    const listElement = document.createElement('li')
+    listElement.dataset.listId = list.id
+    listElement.classList.add('list-name')
+    listElement.innerText = list.name
+    var deleteButton = document.createElement('span');
+    deleteButton.setAttribute('class', 'del-btn')
+    deleteButton.appendChild(document.createTextNode('x'));
+    listElement.appendChild(deleteButton)
+    if (list.id === selectedListId) {
+     listElement.classList.add('active-list')
+    }
+    projectsContainer.appendChild(listElement)
+    deleteButton.addEventListener('click', e => {
+      lists = lists.filter(list => list.id !== deleteButton.parentNode.dataset.listId)
+      listDisplayContainer.style.display = 'none'
+     //  deleteButton.parentNode.dataset.listId = null
+      saveAndRender()
+    })
+  })
+}
 
 export function submitProject() {
     projectForm.addEventListener('submit', (e) => {
@@ -100,32 +115,3 @@ export function submitProject() {
     projectDialog.close()
   })
 }
-
-// export function deleteProject() {
-//   var deleteButtons = document.querySelectorAll('.del-btn')
-//   var deleteButtonsArray = [...deleteButtons]
-//   console.log(deleteButtonsArray)
-//   deleteButtonsArray.forEach(delBtn=> {
-//     delBtn.addEventListener('click', () => {
-//       console.log('pressed')
-//       lists = lists.filter(list => list.id !== delBtn.parentNode.dataset.listId)
-//       saveAndRender()
-//      })
-//   })
-// }
-
-
-// deleteButton.addEventListener('click', () => {
-//   const index = lists.indexOf(listElement)
-//   console.log(index)
-//   lists.splice(index,1)
-//   console.log(lists)
-//   projectsContainer.removeChild(listElement)
-//   save()
-//  })
-
-// deleteButton[i].addEventListener('click', e => {
-//   console.log('pressed')
-//   lists = lists.filter(list => list.id !== selectedListId)
-//   selectedListId = null 
-//   saveAndRender()
