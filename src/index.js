@@ -1,6 +1,6 @@
 import './styles.css';
 import Todo from './createtodo';
-import {  addNewProject, cancelProject, closeProjectDialog, createList, renderLists, renderProjects, saveAndRender, selectedProject, submitProject } from './project';
+import {  addNewProject, cancelProject, checkTask, clearCompletedTasks, closeProjectDialog, createList, renderLists, renderProjects, saveAndRender, selectedProject, submitProject } from './project';
 
 
 addNewProject()
@@ -11,3 +11,5 @@ createList()
 saveAndRender()
 selectedProject()
 renderProjects()
+checkTask()
+clearCompletedTasks()
