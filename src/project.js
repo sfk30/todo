@@ -17,6 +17,7 @@ const taskForm = document.getElementById('task-form')
 const cancelTaskBtn = document.getElementById('cancel-task-btn')
 const dueDate = document.getElementById('due-date')
 const priority = document.querySelector('select')
+const addNewTask = document.getElementById('add-new-task')
 
 
 const LOCAL_STORAGE_LIST_KEY = 'tasks.lists'
@@ -131,24 +132,30 @@ export function selectedProject() {
           renderTaskCount(selectedList)
           clearElement(tasksContainer)
           renderTasks(selectedList)
-          saveAndRender()
+          // saveAndRender()
         })
         renderTaskCount(selectedList)
         clearElement(tasksContainer)
         renderTasks(selectedList)
-        newTaskForm.addEventListener('submit', e => {
+        addNewTask.addEventListener('click', e => {
           e.preventDefault()
           taskDialog.showModal()
           const taskName = newTaskInput.value
           if (taskName === null || taskName === '') return 
-          const task = createTask(taskName)
-          newTaskInput.value = null 
-          const selectedList = lists.find(list => list.id === selectedListId)
-          selectedList.tasks.push(task)
-          renderTaskCount(selectedList)
-          clearElement(tasksContainer)
-          renderTasks(selectedList)
-          saveAndRender()
+          taskForm.addEventListener('submit', e => {
+              e.preventDefault()
+              const taskDue = dueDate.value
+              const taskPriority = priority.value
+              const task = createTask(taskName, taskDue, taskPriority)
+              const selectedList = lists.find(list => list.id === selectedListId)
+              selectedList.tasks.push(task)
+              newTaskInput.value = null 
+              taskDialog.close()
+              renderTaskCount(selectedList)
+              clearElement(tasksContainer)
+              renderTasks(selectedList)
+              // saveAndRender()
+          })
         })
         saveAndRender()
       }
@@ -180,8 +187,8 @@ export function cancelTask() {
 })
 }
 
-export function createTask(name) {
-  return {id: Date.now().toString(), name: name, complete: false }
+export function createTask(name, due, priority) {
+  return {id: Date.now().toString(), name: name, complete: false, due: due, priority: priority }
 }
 
 // 6 
@@ -192,9 +199,13 @@ function renderTasks(selectedList) {
     const checkbox = taskElement.querySelector('input')
     checkbox.id = task.id
     checkbox.checked = task.complete
-    const label = taskElement.querySelector('label')
-    label.htmlFor = task.id
-    label.append(task.name)
+    const name = taskElement.querySelector('.name')
+    name.htmlFor = task.id
+    name.append(task.name)
+    const due = taskElement.querySelector('.due')
+    due.append(task.due)
+    const pri = taskElement.querySelector('.pri')
+    pri.append(task.priority)
     tasksContainer.appendChild(taskElement)
   })
 }
@@ -221,3 +232,43 @@ export function checkTask() {
     }
   })
 }
+
+// export function selectedProject() {
+//   projectsContainer.addEventListener('click', e => {
+//       if (e.target.tagName.toLowerCase() === 'li') {
+//         selectedListId = e.target.dataset.listId
+//         const selectedList = lists.find(list => list.id === selectedListId)
+//         listDisplayContainer.style.display = ''
+//         listTitleElement.innerText = selectedList.name
+//         clearCompleteTasksButton.addEventListener('click', e => {
+//           selectedList.tasks = selectedList.tasks.filter(task => !task.complete)
+//           renderTaskCount(selectedList)
+//           clearElement(tasksContainer)
+//           renderTasks(selectedList)
+//           saveAndRender()
+//         })
+//         renderTaskCount(selectedList)
+//         clearElement(tasksContainer)
+//         renderTasks(selectedList)
+//         newTaskForm.addEventListener('submit', e => {
+//           e.preventDefault()
+//           taskDialog.showModal()
+//           const taskName = newTaskInput.value
+//           const taskDue = dueDate.value
+//           const taskPriority = priority.value
+//           if (taskName === null || taskName === '') return 
+//           const task = createTask(taskName, taskDue, taskPriority)
+//           newTaskInput.value = null 
+//           const selectedList = lists.find(list => list.id === selectedListId)
+
+//           selectedList.tasks.push(task)
+//           renderTaskCount(selectedList)
+//           clearElement(tasksContainer)
+//           renderTasks(selectedList)
+//           saveAndRender()
+//         })
+//         saveAndRender()
+//       }
+//   })
+//   listDisplayContainer.style.display = 'none'
+// }

@@ -337,3 +337,8 @@ dialog[open] #cancel-task-btn {
   border-radius: 3px;
   padding: 5px;
 }
+
+.task {
+  display: grid;
+  grid-template-columns: 40px repeat(3, 200px);
+}
