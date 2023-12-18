@@ -9,8 +9,6 @@ const listTitleElement = document.querySelector('[data-list-title]')
 const listCountElement = document.querySelector('[data-list-count]')
 const tasksContainer = document.querySelector('[data-tasks]')
 const taskTemplate = document.getElementById('task-template')
-const newTaskForm = document.querySelector('[data-new-task-form]')
-const newTaskInput = document.querySelector('[data-new-task-input]')
 const clearCompleteTasksButton = document.querySelector('[data-clear-complete-tasks-button]')
 const taskDialog = document.querySelector('.task-dialog')
 const taskForm = document.getElementById('task-form')
@@ -18,6 +16,7 @@ const cancelTaskBtn = document.getElementById('cancel-task-btn')
 const dueDate = document.getElementById('due-date')
 const priority = document.querySelector('select')
 const addNewTask = document.getElementById('add-new-task')
+const userTaskName = document.getElementById('user-task-name')
 
 
 const LOCAL_STORAGE_LIST_KEY = 'tasks.lists'
@@ -105,14 +104,13 @@ export function renderLists() {
     deleteButton.setAttribute('class', 'del-btn')
     deleteButton.appendChild(document.createTextNode('x'));
     listElement.appendChild(deleteButton)
-    if (list.id === selectedListId) {
-     listElement.classList.add('active-list')
-    }
     projectsContainer.appendChild(listElement)
+    // if (list.id === selectedListId) {
+    //  listElement.classList.add('active-list')
+    // }
     deleteButton.addEventListener('click', e => {
       lists = lists.filter(list => list.id !== deleteButton.parentNode.dataset.listId)
       listDisplayContainer.style.display = 'none'
-     //  deleteButton.parentNode.dataset.listId = null
       saveAndRender()
     })
   })
@@ -127,41 +125,43 @@ export function selectedProject() {
         const selectedList = lists.find(list => list.id === selectedListId)
         listDisplayContainer.style.display = ''
         listTitleElement.innerText = selectedList.name
+        renderTaskCount(selectedList)
+        clearElement(tasksContainer)
+        renderTasks(selectedList)
         clearCompleteTasksButton.addEventListener('click', e => {
           selectedList.tasks = selectedList.tasks.filter(task => !task.complete)
           renderTaskCount(selectedList)
           clearElement(tasksContainer)
           renderTasks(selectedList)
-          // saveAndRender()
+          saveAndRender()
         })
-        renderTaskCount(selectedList)
-        clearElement(tasksContainer)
-        renderTasks(selectedList)
-        addNewTask.addEventListener('click', e => {
-          e.preventDefault()
-          taskDialog.showModal()
-          const taskName = newTaskInput.value
-          if (taskName === null || taskName === '') return 
-          taskForm.addEventListener('submit', e => {
-              e.preventDefault()
-              const taskDue = dueDate.value
-              const taskPriority = priority.value
-              const task = createTask(taskName, taskDue, taskPriority)
-              const selectedList = lists.find(list => list.id === selectedListId)
-              selectedList.tasks.push(task)
-              newTaskInput.value = null 
-              taskDialog.close()
-              renderTaskCount(selectedList)
-              clearElement(tasksContainer)
-              renderTasks(selectedList)
-              // saveAndRender()
-          })
-        })
-        saveAndRender()
-      }
-  })
+  }})
   listDisplayContainer.style.display = 'none'
 }
+
+export function showTaskModal() {
+  addNewTask.addEventListener('click', e => {
+      e.preventDefault()
+      taskDialog.showModal()
+  })
+}
+
+export function addTask() {
+      taskForm.addEventListener('submit', e => {
+          e.preventDefault()
+          const taskName = userTaskName.value
+          const taskDue = dueDate.value
+          const taskPriority = priority.value
+          const task = createTask(taskName, taskDue, taskPriority)
+          const selectedList = lists.find(list => list.id === selectedListId)
+          selectedList.tasks.push(task)
+          taskDialog.close()
+          renderTaskCount(selectedList)
+          clearElement(tasksContainer)
+          renderTasks(selectedList)
+          saveAndRender()
+      })
+    }
 
 // 5 
 
@@ -232,43 +232,3 @@ export function checkTask() {
     }
   })
 }
-
-// export function selectedProject() {
-//   projectsContainer.addEventListener('click', e => {
-//       if (e.target.tagName.toLowerCase() === 'li') {
-//         selectedListId = e.target.dataset.listId
-//         const selectedList = lists.find(list => list.id === selectedListId)
-//         listDisplayContainer.style.display = ''
-//         listTitleElement.innerText = selectedList.name
-//         clearCompleteTasksButton.addEventListener('click', e => {
-//           selectedList.tasks = selectedList.tasks.filter(task => !task.complete)
-//           renderTaskCount(selectedList)
-//           clearElement(tasksContainer)
-//           renderTasks(selectedList)
-//           saveAndRender()
-//         })
-//         renderTaskCount(selectedList)
-//         clearElement(tasksContainer)
-//         renderTasks(selectedList)
-//         newTaskForm.addEventListener('submit', e => {
-//           e.preventDefault()
-//           taskDialog.showModal()
-//           const taskName = newTaskInput.value
-//           const taskDue = dueDate.value
-//           const taskPriority = priority.value
-//           if (taskName === null || taskName === '') return 
-//           const task = createTask(taskName, taskDue, taskPriority)
-//           newTaskInput.value = null 
-//           const selectedList = lists.find(list => list.id === selectedListId)
-
-//           selectedList.tasks.push(task)
-//           renderTaskCount(selectedList)
-//           clearElement(tasksContainer)
-//           renderTasks(selectedList)
-//           saveAndRender()
-//         })
-//         saveAndRender()
-//       }
-//   })
-//   listDisplayContainer.style.display = 'none'
-// }

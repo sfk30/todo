@@ -310,7 +310,7 @@ dialog[open] #cancel-btn {
 }
 
 .task-dialog[open] { 
-  height: 310px;
+  height: 400px;
   width: 400px;
   margin: auto;
   border: 5px solid black;

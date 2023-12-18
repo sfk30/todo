@@ -33,14 +33,14 @@
                 
                         <div class="new-task-creator">
                             <form action="" data-new-task-form>
-                                <input 
+                                <!-- <input 
                                   type="text"
                                   data-new-task-input
                                   class="new task"
                                   placeholder="new task name"
                                   aria-label="new task name"
-                                />
-                                <button id="add-new-task" class="btn create" aria-label="create new task">+</button>
+                                /> -->
+                                <button id="add-new-task" class="btn create" aria-label="create new task">Add new task +</button>
                               </form>
                         </div>
                 
@@ -74,6 +74,8 @@
 
     <dialog class="task-dialog">
       <form id="task-form">
+          <label for="user-task-name">Task Name:</label>
+          <input type="text" id="user-task-name" name="user-task-name" placeholder="Enter task name" required>
           <label for="due-date">Due date:</label>
           <input type="date" id="due-date" name="due-date" required>
           <label for="priority">Priority:</label>

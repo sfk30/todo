@@ -1,5 +1,5 @@
 import './styles.css';
-import {  addNewProject, addNewTasks, cancelProject, cancelTask, checkTask,  closeProjectDialog, closeTaskDialog, createList, renderProjects, saveAndRender, selectedProject, submitProject } from './project';
+import {  addNewProject, addTask, cancelProject, cancelTask, checkTask, closeProjectDialog, closeTaskDialog, createList, renderProjects, saveAndRender, selectedProject, showTaskModal, submitProject } from './project';
 
 
 addNewProject()
@@ -13,3 +13,5 @@ renderProjects()
 checkTask()
 closeTaskDialog()
 cancelTask()
+addTask()
+showTaskModal()
