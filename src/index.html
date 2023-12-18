@@ -24,39 +24,12 @@
             <div id="display">
                 <div class="todo-list" data-list-display-container>
                     <div class="todo-header">
-                      <h2 class="list-title" data-list-title>YouTube</h2>
-                      <p class="task-count" data-list-count>3 tasks remaining</p>
+                      <h2 class="list-title" data-list-title></h2>
+                      <p class="task-count" data-list-count></p>
                     </div>
               
                     <div class="todo-body">
-                      <div class="tasks" data-tasks>
-                        <div class="task">
-                            <input 
-                              type="checkbox"
-                              id="task-1"
-                            />
-                            <label for="task-1">
-                              <span class="custom-checkbox"></span>
-                              record todo list video
-                            </label>
-                          </div>
-                          <!-- /task-1 -->
-                
-                          <div class="task">
-                              <input 
-                                type="checkbox"
-                                id="task-2"
-                              />
-                              <label for="task-2">
-                                <span class="custom-checkbox"></span>
-                                another task
-                              </label>
-                            </div>
-                            <!-- /task-2 -->
-                
-                            
-                              <!-- /task-3 -->
-                        </div>
+                      <div class="tasks" data-tasks></div>
                 
                         <div class="new-task-creator">
                             <form action="" data-new-task-form>
@@ -73,10 +46,9 @@
                 
                         <div class="delete-stuff">
                           <button class="btn delete" data-clear-complete-tasks-button>Clear completed tasks</button>
-                          <!-- <button class="btn delete">Delete list</button> -->
                         </div>
-                      </div>
-                    </div>
+                      </div> <!--end of todo-body-->
+                    </div> <!--end of todo-list-->
         </div> <!--end of display-->
         <template id="task-template">
           <div class="task">
@@ -97,6 +69,22 @@
             <button id="sub-btn">Submit</button>
         </form>
     </dialog>
+
+    <dialog class="task-dialog">
+      <form id="task-form">
+          <label for="due-date">Due date:</label>
+          <input type="date" id="due-date" name="due-date" required>
+          <label for="priority">Priority:</label>
+          <select name="priority" id="priority">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+          <button id="cancel-task-btn">Cancel</button>
+          <button id="sub-task-btn">Submit</button>
+      </form>
+    </dialog>
+
 
 </body>
 </html>

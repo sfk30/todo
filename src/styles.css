@@ -308,3 +308,32 @@ dialog[open] #cancel-btn {
 #display { 
     padding: 40px;
 }
+
+.task-dialog[open] { 
+  height: 310px;
+  width: 400px;
+  margin: auto;
+  border: 5px solid black;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+dialog[open] #sub-task-btn {
+  background-color: green;
+  color: white;
+  height: 30px;
+  width: 290px;
+  border-radius: 3px;
+  padding: 5px;
+  border: 1px solid #166534;
+}
+
+
+dialog[open] #cancel-task-btn {
+  background-color: red;
+  color: white;
+  height: 30px;
+  width: 290px;
+  border-radius: 3px;
+  padding: 5px;
+}
