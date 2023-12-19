@@ -20,8 +20,6 @@ const priority = document.querySelector('select')
 const addNewTask = document.getElementById('add-new-task')
 const userTaskName = document.getElementById('user-task-name')
 const inbox = document.getElementById('inbox')
-const newTaskForm = document.querySelector('[data-new-task-form]')
-const deleteDiv = document.querySelector('.delete-stuff')
 
 
 
@@ -214,6 +212,8 @@ function renderTasks(selectedList) {
     const pri = taskElement.querySelector('.pri')
     pri.append(task.priority)
     tasksContainer.appendChild(taskElement)
+    addNewTask.style.display = ''
+    clearCompleteTasksButton.style.display = ''
   })
 }
 
@@ -250,7 +250,9 @@ export function showInbox() {
     lists.forEach(list => {
       renderTasks(list)
     })
-    newTaskForm.removeChild(addNewTask)
-    deleteDiv.removeChild(clearCompleteTasksButton)
+    // newTaskForm.removeChild(addNewTask)
+    // deleteDiv.removeChild(clearCompleteTasksButton)
+    addNewTask.style.display = 'none'
+    clearCompleteTasksButton.style.display = 'none'
   })
 }
