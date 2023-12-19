@@ -19,6 +19,8 @@ const dueDate = document.getElementById('due-date')
 const priority = document.querySelector('select')
 const addNewTask = document.getElementById('add-new-task')
 const userTaskName = document.getElementById('user-task-name')
+const inbox = document.getElementById('inbox')
+const display = document.getElementById('display')
 
 
 const LOCAL_STORAGE_LIST_KEY = 'tasks.lists'
@@ -233,5 +235,18 @@ export function checkTask() {
       save()
       renderTaskCount(selectedList)
     }
+  })
+}
+
+// 9 
+
+export function showInbox() {
+  inbox.addEventListener('click', () => {
+    listTitleElement.innerHTML = 'All tasks'
+    listCountElement.innerHTML = ''
+    clearElement(tasksContainer)
+    lists.forEach(list => {
+      renderTasks(list)
+    })
   })
 }
