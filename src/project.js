@@ -20,7 +20,9 @@ const priority = document.querySelector('select')
 const addNewTask = document.getElementById('add-new-task')
 const userTaskName = document.getElementById('user-task-name')
 const inbox = document.getElementById('inbox')
-const display = document.getElementById('display')
+const newTaskForm = document.querySelector('[data-new-task-form]')
+const deleteDiv = document.querySelector('.delete-stuff')
+
 
 
 const LOCAL_STORAGE_LIST_KEY = 'tasks.lists'
@@ -248,5 +250,7 @@ export function showInbox() {
     lists.forEach(list => {
       renderTasks(list)
     })
+    newTaskForm.removeChild(addNewTask)
+    deleteDiv.removeChild(clearCompleteTasksButton)
   })
 }
