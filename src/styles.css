@@ -340,5 +340,5 @@ dialog[open] #cancel-task-btn {
 
 .task {
   display: grid;
-  grid-template-columns: 40px repeat(3, 200px);
+  grid-template-columns: 60px repeat(3, 200px);
 }

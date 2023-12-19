@@ -1,3 +1,5 @@
+import {format} from 'date-fns'
+
 const addProject = document.getElementById('add-project')
 const projectDialog = document.querySelector('.project-dialog')
 const projectForm = document.getElementById('project-form')
@@ -203,7 +205,8 @@ function renderTasks(selectedList) {
     name.htmlFor = task.id
     name.append(task.name)
     const due = taskElement.querySelector('.due')
-    due.append(task.due)
+    const formattedDate = format(task.due, 'dd/MM/yyyy')
+    due.append(formattedDate)
     const pri = taskElement.querySelector('.pri')
     pri.append(task.priority)
     tasksContainer.appendChild(taskElement)
