@@ -20,6 +20,8 @@ const priority = document.querySelector('select')
 const addNewTask = document.getElementById('add-new-task')
 const userTaskName = document.getElementById('user-task-name')
 const inbox = document.getElementById('inbox')
+const today = document.getElementById('today')
+const todayTasksDiv = document.querySelector('.today-tasks')
 
 
 
@@ -250,9 +252,41 @@ export function showInbox() {
     lists.forEach(list => {
       renderTasks(list)
     })
-    // newTaskForm.removeChild(addNewTask)
-    // deleteDiv.removeChild(clearCompleteTasksButton)
     addNewTask.style.display = 'none'
     clearCompleteTasksButton.style.display = 'none'
   })
+}
+
+// 10 
+
+export function showTodayTasks() {
+  today.addEventListener('click', () => {
+    listTitleElement.innerHTML = 'Tasks for today'
+    listCountElement.innerHTML = ''
+    clearElement(tasksContainer)
+    renderTodaysTasks(lists)
+  })
+  addNewTask.style.display = 'none'
+  clearCompleteTasksButton.style.display = 'none'
+}
+
+function renderTodaysTasks(lists)  {
+  lists.forEach(list => list.tasks.forEach(task => {
+    const taskElement = document.importNode(taskTemplate.content, true)
+    const checkbox = taskElement.querySelector('input')
+    checkbox.id = task.id
+    checkbox.checked = task.complete
+    const name = taskElement.querySelector('.name')
+    name.htmlFor = task.id
+    name.append(task.name)
+    const due = taskElement.querySelector('.due')
+    const formattedDate = format(task.due, 'dd/MM/yyyy')
+    const todaysDate = new Date()
+    const todaysDateFormatted = format(todaysDate, 'dd/MM/yyyy')
+    due.append(formattedDate)
+    const pri = taskElement.querySelector('.pri')
+    pri.append(task.priority)
+    if (formattedDate === todaysDateFormatted) {
+      tasksContainer.appendChild(taskElement)}
+  }))
 }
