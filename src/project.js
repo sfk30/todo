@@ -21,7 +21,6 @@ const addNewTask = document.getElementById('add-new-task')
 const userTaskName = document.getElementById('user-task-name')
 const inbox = document.getElementById('inbox')
 const today = document.getElementById('today')
-const todayTasksDiv = document.querySelector('.today-tasks')
 
 
 
